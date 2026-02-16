@@ -2,7 +2,7 @@
 
 A Node.js backend application implementing role-based authentication and authorization for a music platform. This system allows users and artists to register, login, and perform role-specific actions such as uploading music and creating albums.
 
-## 🚀 Features
+## Features
 
 - **User Authentication**: Register and login functionality with JWT tokens
 - **Role-Based Authorization**: Two user roles - `user` and `artist`
@@ -11,53 +11,6 @@ A Node.js backend application implementing role-based authentication and authori
 - **Cookie-Based Sessions**: Secure JWT token storage in HTTP cookies
 - **Password Security**: Bcrypt hashing for password encryption
 - **MongoDB Database**: Mongoose ODM for data modeling
-
-## 📋 Prerequisites
-
-Before running this application, make sure you have the following installed:
-
-- [Node.js](https://nodejs.org/) (v14 or higher)
-- [MongoDB](https://www.mongodb.com/) (local or Atlas)
-- [ImageKit Account](https://imagekit.io/) (for file storage)
-
-## 🛠️ Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd role_base_auth_system
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Set up environment variables**
-   
-   Create a `.env` file in the root directory with the following variables:
-   ```env
-   PORT=3000
-   MONGO_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret_key
-   IMAGEKIT_PUBLIC_KEY=your_imagekit_public_key
-   IMAGEKIT_PRIVATE_KEY=your_imagekit_private_key
-   IMAGEKIT_URL_ENDPOINT=your_imagekit_url_endpoint
-   ```
-
-4. **Start the application**
-   
-   For development (with auto-reload):
-   ```bash
-   npm run dev
-   ```
-   
-   For production:
-   ```bash
-   npm start
-   ```
-
-The server will start on `http://localhost:3000` (or your configured PORT).
 
 ## 📁 Project Structure
 
@@ -191,24 +144,7 @@ role_base_auth_system/
 }
 ```
 
-## 🧪 Testing
 
-To test the API endpoints, you can use tools like:
-- [Postman](https://www.postman.com/)
-- [Thunder Client](https://www.thunderclient.com/) (VS Code extension)
-- [cURL](https://curl.se/)
-
-Example cURL request:
-```bash
-curl -X POST http://localhost:3000/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "testuser",
-    "email": "test@example.com",
-    "password": "password123",
-    "role": "user"
-  }'
-```
 
 ## 📦 Dependencies
 
@@ -221,24 +157,3 @@ curl -X POST http://localhost:3000/api/auth/register \
 - **@imagekit/nodejs**: ImageKit integration
 - **dotenv**: Environment variable management
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the ISC License.
-
-## 👤 Author
-
-Your Name
-
-## 🙏 Acknowledgments
-
-- Express.js for the robust web framework
-- MongoDB for the flexible database solution
-- ImageKit for file storage services
