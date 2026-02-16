@@ -5,20 +5,6 @@ const jwt = require("jsonwebtoken");
 
 
 async function createMusic(req,res) {
-  const token = req.cookies.token;
-
-  if(!token){
-    console.log("No token provided");
-    return res.status(401).send("Unauthorized");
-  }
-
-  try{
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
-
-    if (decoded.role !== "artist"){
-      return res.status(403).json({message:"Forbidden: Only artists can create music entries"});
-    }
-  
 
   const {title} = req.body;
   const file = req.file;
@@ -28,7 +14,7 @@ async function createMusic(req,res) {
   const music = await musicModel.create({
     uri: result.url,
     title,
-    artist: decoded.id,
+    artist: req.user.id,
   })
 
   res.status(201).json({message:"Music created successfully", 
@@ -39,13 +25,37 @@ async function createMusic(req,res) {
       artist: music.artist,
     }
   })}
-    catch(err){
-    console.log(err);
-    res.status(401).json({message:"Unauthorized! Invalid token"});
+
+async function createAlbum(req,res) {
+    const {title, musicIds} = req.body;
+
+    const album = await albumModel.create({
+      title,
+      musics: musicIds,
+      artist: req.user.id, // Assuming the authenticated user's ID is available in req.user.id, which is set by the authentication middleware. This associates the created album with the artist who is currently logged in.
+    })
+    res.status(201).json({message:"Album created successfully", 
+      album:{
+        id: album._id,
+        title: album.title,
+        musics: album.musics,
+        artist: album.artist,
+      }
+    })
   }
+
+async function getAllMusics(req,res){
+  const musics = await musicModel.find()
+
+  res.status(200).json({musics})
+}
+
+async function getAllAlbums(req,res){
+  const albums = await albumModel.find()
+
+  res.status(200).json({albums})
 }
 
 module.exports = {
-  createMusic,
+  createMusic,createAlbum,getAllMusics,getAllAlbums
 }
-
