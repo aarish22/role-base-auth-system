@@ -66,8 +66,13 @@ res.cookie("token", token)
 res.status(200).json({message:"Login successful", user:{username:user.username, email:user.email, role:user.role }})
 }
 
+async function logoutUser(req,res) {
+  res.clearCookie("token");
+  res.status(200).json({message:"Logout successful"});
+} 
+
 module.exports = {
-  registerUser, loginUser
+  registerUser, loginUser, logoutUser
 }
 
 // auth.controller.js contains the logic for handling authentication-related actions, such as user registration and login. In the registerUser function, we extract the username, email, password, and role from the request body. We check if a user with the same username or email already exists in the database. If so, we return a 400 status with an error message. If not, we create a new user in the database and generate a JWT token that includes the user's ID and role. We then set this token as a cookie in the response and return a success message along with the new user's information (excluding the password). This function will be called when a user attempts to register through the corresponding route defined in auth.routes.js.

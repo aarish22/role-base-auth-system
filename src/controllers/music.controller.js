@@ -45,13 +45,13 @@ async function createAlbum(req,res) {
   }
 
 async function getAllMusics(req,res){
-  const musics = await musicModel.find()
+  const musics = await musicModel.find().limit(20) // Limit the number of music entries returned to 20 for performance reasons. This helps prevent overwhelming the client with too much data and allows for faster response times, especially if the database contains a large number of music entries. You can adjust this limit as needed based on your application's requirements and expected data volume.
 
   res.status(200).json({musics})
 }
 
 async function getAllAlbums(req,res){
-  const albums = await albumModel.find()
+  const albums = await albumModel.find().limit
 
   res.status(200).json({albums})
 }
